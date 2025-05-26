@@ -6,6 +6,7 @@ public class StudentMenu {
     //학생 로그인, 회원가입 메뉴
     public static void showStudentMenu(Scanner scanner) {
         StudentSVC studentSVC = new StudentSVC();
+        StudentSU studentSU = new StudentSU();
 
         while (true) {
             System.out.println("[학생]메뉴선택: 1.로그인  2.회원가입  3.홈으로");
@@ -74,6 +75,12 @@ public class StudentMenu {
                                 scanner.nextLine();
                                 //시험응시
                                 if (number == 1) {
+                                    
+                                    System.out.println("시험응시 시작");
+                                    System.out.println("2025년 1학기 JAVA 초급 시험시작\n");
+                                    TestSVC info = new TestSVC();
+
+                                    Test check = info.checkTest();
                                     //점수확인
                                 } else if (number == 2) {
                                     //로그아웃
@@ -89,7 +96,8 @@ public class StudentMenu {
                         }
                         //회원가입 메뉴 구현 예정
                     } else if (num == 1) {
-                        System.out.println("회원가입 기능은 아직 구현되지 않았습니다.\n");
+                        studentSU.registerStudent(scanner); // 회원가입 로직 위임
+                        num = 0; // 완료 후 로그인 메뉴로 복귀
                     } else if (num == 3) {//
                         break;
                     } else if (num == 4) {
@@ -100,7 +108,7 @@ public class StudentMenu {
                 }
 
             } else if (selNum == 2) {
-                System.out.println("회원가입 기능은 아직 구현되지 않았습니다.\n");
+                studentSU.registerStudent(scanner); // 직접 회원가입 선택 시
 
             } else if (selNum == 3) {
                 break; // 학생 메뉴 빠져나와 메인 메뉴로
