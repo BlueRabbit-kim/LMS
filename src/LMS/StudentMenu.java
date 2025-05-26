@@ -3,17 +3,16 @@ package LMS;
 import java.util.Scanner;
 
 public class StudentMenu {
-    //학생 로그인, 회원가입 메뉴
     public static void showStudentMenu(Scanner scanner) {
         StudentSVC studentSVC = new StudentSVC();
 
         while (true) {
             System.out.println("[학생]메뉴선택: 1.로그인  2.회원가입  3.홈으로");
             int selNum;
-            // 잘못된 입력 버림
+
             if (!scanner.hasNextInt()) {
                 System.out.println("1~3 사이의 숫자를 입력해주세요.\n");
-                scanner.nextLine();
+                scanner.nextLine(); // 잘못된 입력 버림
                 continue;
             }
 
@@ -43,28 +42,28 @@ public class StudentMenu {
                                 }
                                 sel = scanner.nextInt();
                                 scanner.nextLine();
-                                if (sel == 1) {//로그인 메뉴로 다시 복귀
+                                if (sel == 1) {
                                     break;
-                                } else if (sel == 2) {//회원가입 메뉴로 전환
+                                } else if (sel == 2) {
                                     num = 1;
                                     break;
-                                } else if (sel == 3) {//학생 로그인, 회원가입 메뉴
+                                } else if (sel == 3) {
                                     num = 3;
                                     break;
-                                } else if (sel == 4) {//메인 메뉴로 복귀
+                                } else if (sel == 4) {
                                     num = 4;
                                     break;
-                                } else {//잘못된 값 입력시 출력
+                                } else {
                                     System.out.println("1~4사이의 숫자를 입력 해주세요.\n");
                                 }
 
                             }
-
+                            //회원가입 메뉴
                         }
-                        //회원가입 메뉴 구현 예정
+
                     } else if (num == 1) {
                         System.out.println("회원가입 기능은 아직 구현되지 않았습니다.\n");
-                    } else if (num == 3) {//
+                    } else if (num == 3) {
                         break;
                     } else if (num == 4) {
                         selNum = 3;
