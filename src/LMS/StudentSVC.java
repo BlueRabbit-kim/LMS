@@ -51,7 +51,8 @@ public class StudentSVC {
                 stmt.close();
                 con.close();
             } catch (Exception e) {
-                System.err.println("DB가 정상적으로 종료되지 않음");;
+                System.err.println("DB가 정상적으로 종료되지 않음");
+                ;
             }
         }
         return user;//
@@ -75,21 +76,7 @@ public class StudentSVC {
         return cnt;
     }
 
-    //회원탈퇴 (delete)
-    public int deleteMember(String id) {
-        connect();
-        PreparedStatement ps = null;
-        String sql = "delete from member where mid= ?";
-        int cnt = 0;
-        try {
-            ps = con.prepareStatement(sql);
-            ps.setString(1, id);
-            cnt = ps.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return cnt;
-    }
-
 
 }
+
+
