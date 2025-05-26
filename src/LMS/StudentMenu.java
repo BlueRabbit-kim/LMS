@@ -72,12 +72,13 @@ public class StudentMenu {
                                 }
                                 number = scanner.nextInt();
                                 scanner.nextLine();
+                                //시험응시
                                 if(number == 1){
-
+                                //점수확인
                                 }else if(number == 2){
-
+                                //로그아웃
                                 }else if(number == 3){
-
+                                    break;
                                 }else{
 
                                 }
