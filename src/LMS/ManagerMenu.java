@@ -2,6 +2,8 @@ package LMS;
 
 import java.util.Scanner;
 
+import static LMS.StateSVC.stateSVC;
+
 public class ManagerMenu {
     //관리자 로그인, 회원가입 메뉴
     public static void showManagerMenu(Scanner scanner){
@@ -112,11 +114,70 @@ public class ManagerMenu {
                     adminSVC.printManagerList();
                     break;
                 case "4":
-                    System.out.println("상태변경 기능은 아직 구현되지 않았습니다.");
+                    stateSVC = new StateSVC();
+                    System.out.println("상태 변경 메뉴");
+                    System.out.print("변경할 아이디 입력 >> ");
+                    String targetIdForState = scanner.nextLine();
+
+                    if (!user.getRole().equalsIgnoreCase("SUPER")) {
+                        System.out.println("권한이 없습니다. SUPER 관리자만 상태 변경이 가능합니다.");
+                        break;
+                    }
+
+                    System.out.print("변경할 상태 입력 (0.사용불가 또는 대기  1.사용가능) >> ");
+                    String stateInput = scanner.nextLine();
+                    int newState;
+
+                    if (stateInput.equals("0")) {
+                        newState = 0;
+                    } else if (stateInput.equals("1")) {
+                        newState = 1;
+                    } else {
+                        System.out.println("잘못된 입력입니다. 다시 시도해주세요.");
+                        break;
+                    }
+
+                    int stateChangeResult = stateSVC.updateState(targetIdForState, newState);
+                    if (stateChangeResult > 0) {
+                        System.out.println("상태변경됨");
+                    } else {
+                        System.out.println("변경 실패");
+                    }
                     break;
+
                 case "5":
-                    System.out.println("역할변경 기능은 아직 구현되지 않았습니다.");
+                    RollSVC rollSVC = new RollSVC();
+                    System.out.println("역할 변경 메뉴");
+                    System.out.print("변경할 아이디 입력 >> ");
+                    String targetId = scanner.nextLine();
+
+
+                    if (!user.getRole().equalsIgnoreCase("SUPER")) {
+                        System.out.println("권한이 없습니다. SUPER 관리자만 역할 변경이 가능합니다.");
+                        break;
+                    }
+
+                    System.out.print("변경할 역할 입력 (1.SUPER  2.SUB) >> ");
+                    String roleInput = scanner.nextLine();
+                    String newRole = null;
+
+                    if (roleInput.equals("1")) {
+                        newRole = "SUPER";
+                    } else if (roleInput.equals("2")) {
+                        newRole = "SUB";
+                    } else {
+                        System.out.println("잘못된 입력입니다. 다시 시도해주세요.");
+                        break;
+                    }
+
+                    int changeResult = rollSVC.updateRole(targetId, newRole);
+                    if (changeResult > 0) {
+                        System.out.println("상태변경됨");
+                    } else {
+                        System.out.println("변경 실패");
+                    }
                     break;
+
                 case "6":
                     System.out.println("로그아웃되었습니다.\n");
                     return;  // 메인 메뉴로 복귀

@@ -3,7 +3,7 @@ package LMS;
 import java.sql.*;
 
 public class LoginSVC {
-    Connection con;
+    static Connection con;
 
     static {
         try {
@@ -13,14 +13,16 @@ public class LoginSVC {
         }
     }
 
-    public void connect() {
+    public static void connect() {
         try {
             String url = "jdbc:mysql://localhost:3306/lms";
-            con = DriverManager.getConnection(url, "root", "dongyang");
-            System.out.println("Connection Success!");
+            con = DriverManager.getConnection(url, "root", "1111");
         } catch (SQLException se) {
             se.printStackTrace();
         }
+    }
+
+    public static void close(PreparedStatement pstmt, Connection conn) {
     }
 
     //로그인
@@ -38,11 +40,18 @@ public class LoginSVC {
             rs = ps.executeQuery();
 
             if (rs.next()) {
+                int state = rs.getInt("state");
+
+                // 상태가 0이면 로그인 불가
+                if (state == 0) {
+                    return null;
+                }
+
                 String name = rs.getString("mnm");
                 String role = rs.getString("role");
-                int state = rs.getInt("state");
                 user = new User(id, passwd, name, role, state);
             }
+
         } catch (SQLException se) {
             System.out.println("로그인 중 오류 발생");
             se.printStackTrace();
@@ -57,6 +66,7 @@ public class LoginSVC {
         }
         return user;
     }
+
 
     // 회원가입 기능
     public int insertMember(String id, String passwd, String name) {

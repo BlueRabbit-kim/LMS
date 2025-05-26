@@ -17,7 +17,7 @@ public class StudentSVC {
     //root계정 접속
     public void connect() {
         try {
-            String url = "jdbc:mysql://localhost:3306/hi";
+            String url = "jdbc:mysql://localhost:3306/lms";
             con = DriverManager.getConnection(url, "root", "1111");
         } catch (SQLException se) {
             System.err.println("sql 계정 접속 오류");
@@ -39,11 +39,11 @@ public class StudentSVC {
             if (rs.next()) {
                 String sno = rs.getString("sno");
                 String snm = rs.getString("snm");
-                suser = new StudentUser(sno, snm);
+                suser = new StudentUser();
             }
         } catch (SQLException se) {
             System.err.println("sql 데이터 조회 오류");
-        //DB 종료 및 예외 확인
+            //DB 종료 및 예외 확인
         } finally {
             try {
                 rs.close();
@@ -89,4 +89,6 @@ public class StudentSVC {
         }
         return cnt;
     }
+
+
 }

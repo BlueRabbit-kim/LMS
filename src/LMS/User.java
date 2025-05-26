@@ -25,5 +25,6 @@ public class User {
     @Override
     public String toString() {
         return "ID: " + id + ", 이름: " + name + ", 역할: " + role + ", 상태: " + state;
+
     }
 }

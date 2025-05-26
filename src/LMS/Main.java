@@ -16,7 +16,8 @@ public class Main {
                     ManagerMenu.showManagerMenu(scanner);
                     break;
                 case "2":
-                    System.out.println("학생 메뉴는 아직 구현되지 않았습니다.\n");
+                    //학생 메뉴로 이동
+                    StudentMenu.showStudentMenu(scanner);
                     break;
                 case "3":
                     System.out.println("시스템을 종료합니다.");
